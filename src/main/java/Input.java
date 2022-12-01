@@ -6,6 +6,9 @@ import java.util.ArrayList;
 
 public class Input {
 
+    public static String fileBasePath ="/Users/brettdouglasbauereis/Repos/AdventOfCode2022/src/main/resources/";
+    public static String testFileBasePath = "/Users/brettdouglasbauereis/Repos/AdventOfCode2022/src/test/resources/";
+
     public static ArrayList<String> getFileRowsAsArrayOfStrings(String filePathBase, String fileName) {
         String fullFilePath = filePathBase + fileName;
         BufferedReader reader;
