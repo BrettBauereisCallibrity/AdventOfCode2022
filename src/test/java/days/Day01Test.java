@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 public class Day01Test {
 
-    private static String baseFilePath = "/Users/brettdouglasbauereis/Repos/AdventOfCode2022/src/test/Resources/";
+    private static String baseFilePath = "/Users/brettdouglasbauereis/Repos/AdventOfCode2022/src/test/resources/";
 
     @Test
     private static void part1Test()
