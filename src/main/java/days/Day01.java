@@ -15,23 +15,21 @@ public class Day01 {
 
     public static Integer part1(String filePathBase)
     {
-        ArrayList<String> lines = Input.getFileRowsAsArrayOfStrings(filePathBase, "Day01.txt");
-        ArrayList<Integer> elfTotals = calculateElfTotals(lines);
-        return Collections.max(elfTotals);
+        return Collections.max(calculateElfTotals(filePathBase));
     }
 
     public static Integer part2(String filePathBase)
     {
-        ArrayList<String> lines = Input.getFileRowsAsArrayOfStrings(filePathBase, "Day01.txt");
-        ArrayList<Integer> elfTotals = calculateElfTotals(lines);
+        ArrayList<Integer> elfTotals = calculateElfTotals(filePathBase);
         Collections.sort(elfTotals);
         List<Integer> top3 = elfTotals.subList(elfTotals.size()-3, elfTotals.size());
         return top3.stream().mapToInt(Integer::intValue).sum();
     }
 
-    private static ArrayList<Integer> calculateElfTotals(ArrayList<String> lines)
+    private static ArrayList<Integer> calculateElfTotals(String filePathBase)
     {
-        ArrayList<Integer> elfTotals = new ArrayList<Integer>();
+        ArrayList<String> lines = Input.readAsLines(filePathBase, "Day01.txt");
+        ArrayList<Integer> elfTotals = new ArrayList<>();
         Integer currentSum = 0;
 
         for (int i = 0 ; i < lines.size() ; i++)

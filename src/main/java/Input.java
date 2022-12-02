@@ -9,7 +9,7 @@ public class Input {
     public static String fileBasePath ="/Users/brettdouglasbauereis/Repos/AdventOfCode2022/src/main/resources/";
     public static String testFileBasePath = "/Users/brettdouglasbauereis/Repos/AdventOfCode2022/src/test/resources/";
 
-    public static ArrayList<String> getFileRowsAsArrayOfStrings(String filePathBase, String fileName) {
+    public static ArrayList<String> readAsLines(String filePathBase, String fileName) {
         String fullFilePath = filePathBase + fileName;
         BufferedReader reader;
         ArrayList<String> lines = new ArrayList<>();
@@ -29,4 +29,5 @@ public class Input {
 
         return lines;
     }
+
 }
