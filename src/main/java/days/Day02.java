@@ -42,19 +42,13 @@ public class Day02 {
 
     public static Integer getTheScore(ArrayList<String> lines, ArrayList<char[]> scoreTemplates)
     {
-        ArrayList<String> newLines = new ArrayList<>();
+        Integer score = 0;
         for (String line : lines) {
-            newLines.add(convertLettersToScores(line, scoreTemplates));
+            String[] scoresAsChars = convertLettersToScores(line, scoreTemplates).split(" ");
+            score += (Integer.parseInt(scoresAsChars[0]));
+            score += (Integer.parseInt(scoresAsChars[1]));
         }
-
-        ArrayList<Integer> scores = new ArrayList<>();
-        for (String line : newLines) {
-            String[] splits = line.split(" ");
-            scores.add(Integer.parseInt(splits[0]));
-            scores.add(Integer.parseInt(splits[1]));
-        }
-
-        return scores.stream().mapToInt(Integer::intValue).sum();
+        return score;
     }
 
     public static String convertLettersToScores(String line, ArrayList<char[]> scoreTemplates)
