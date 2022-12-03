@@ -21,10 +21,10 @@ public class Day02 {
     public static Integer part1(String filePathBase)
     {
         ArrayList<String> lines = Input.readAsLines(filePathBase, "Day02.txt");
-        ArrayList<char[]> scoreTemplates = new ArrayList<>();
-        scoreTemplates.add(new char[]{'X', rock, tie, loss, win});
-        scoreTemplates.add(new char[]{'Y', paper, win, tie, loss});
-        scoreTemplates.add(new char[]{'Z', scissors, loss, win, tie});
+        ArrayList<ScoreTemplate> scoreTemplates = new ArrayList<>();
+        scoreTemplates.add(new ScoreTemplate('X', rock, tie, loss, win));
+        scoreTemplates.add(new ScoreTemplate('Y', paper, win, tie, loss));
+        scoreTemplates.add(new ScoreTemplate('Z', scissors, loss, win, tie));
 
         return getTheScore(lines, scoreTemplates);
     }
@@ -32,15 +32,15 @@ public class Day02 {
     public static Integer part2(String filePathBase)
     {
         ArrayList<String> lines = Input.readAsLines(filePathBase, "Day02.txt");
-        ArrayList<char[]> scoreTemplates = new ArrayList<>();
-        scoreTemplates.add(new char[]{'X', loss, scissors, rock, paper});
-        scoreTemplates.add(new char[]{'Y', tie, rock, paper, scissors});
-        scoreTemplates.add(new char[]{'Z', win, paper, scissors, rock});
+        ArrayList<ScoreTemplate> scoreTemplates = new ArrayList<>();
+        scoreTemplates.add(new ScoreTemplate('X', loss, scissors, rock, paper));
+        scoreTemplates.add(new ScoreTemplate('Y', tie, rock, paper, scissors));
+        scoreTemplates.add(new ScoreTemplate('Z', win, paper, scissors, rock));
 
         return getTheScore(lines, scoreTemplates);
     }
 
-    public static Integer getTheScore(ArrayList<String> lines, ArrayList<char[]> scoreTemplates)
+    public static Integer getTheScore(ArrayList<String> lines, ArrayList<ScoreTemplate> scoreTemplates)
     {
         Integer score = 0;
         for (String line : lines) {
@@ -51,17 +51,61 @@ public class Day02 {
         return score;
     }
 
-    public static String convertLettersToScores(String line, ArrayList<char[]> scoreTemplates)
+    public static String convertLettersToScores(String line, ArrayList<ScoreTemplate> scoreTemplates)
     {
-        for (char[] template : scoreTemplates)
+        for (ScoreTemplate template : scoreTemplates)
         {
-            if (line.contains(String.valueOf(template[0])))
+            if (line.contains(String.valueOf(template.getXyz())))
             {
-                return line.replace(template[0], template[1]).replace('A', template[2]).replace('B', template[3]).replace('C', template[4]);
+                return line.replace(template.getXyz(), template.getXyzMeans())
+                            .replace('A', template.getAMeans())
+                            .replace('B', template.getBMeans())
+                            .replace('C', template.getCMeans());
             }
         }
-
         return line;
+    }
+
+    public static class ScoreTemplate {
+        private char xyz;
+        private char xyzMeans;
+        private char aMeans;
+        private char bMeans;
+        private char cMeans;
+
+        public ScoreTemplate(char xyz, char xyzMeans, char aMeans, char bMeans, char cMeans)
+        {
+            this.xyz = xyz;
+            this.xyzMeans = xyzMeans;
+            this.aMeans = aMeans;
+            this.bMeans = bMeans;
+            this.cMeans = cMeans;
+        }
+
+        public char getXyz()
+        {
+            return xyz;
+        }
+
+        public char getXyzMeans()
+        {
+            return xyzMeans;
+        }
+
+        public char getAMeans()
+        {
+            return aMeans;
+        }
+
+        public char getBMeans()
+        {
+            return bMeans;
+        }
+
+        public char getCMeans()
+        {
+            return cMeans;
+        }
     }
 
 }
