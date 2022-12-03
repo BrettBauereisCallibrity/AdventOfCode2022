@@ -1,7 +1,7 @@
 package main.java.days;
 
 import main.java.Input;
-
+import main.java.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,20 +16,15 @@ public class Day03 {
     {
         ArrayList<String> lines = Input.readAsLines(filePathBase, "Day03.txt");
         Integer scores = 0;
+
         for (String line : lines)
         {
-            int mid = line.length() / 2;
-            String[] parts = {line.substring(0, mid), line.substring(mid)};
+            ArrayList<Character> firstHalf = Utils.convertStringToArraylistOfCharacters(line.substring(0, line.length() / 2));
+            ArrayList<Character> secondHalf = Utils.convertStringToArraylistOfCharacters(line.substring(line.length() / 2));
+            firstHalf.retainAll(secondHalf);
 
-            ArrayList<Character> firstHalf = convertStringToArraylistChars(parts[0]);
-            ArrayList<Character> secondHalf = convertStringToArraylistChars(parts[1]);
-
-            List<Character> common = new ArrayList<>(firstHalf);
-            common.retainAll(secondHalf);
-
-            scores += convertCharToValue(common.get(0));
+            scores += convertCharToValue(firstHalf.get(0));
         }
-
         return scores;
     }
 
@@ -37,29 +32,16 @@ public class Day03 {
     {
         ArrayList<String> lines = Input.readAsLines(filePathBase, "Day03.txt");
         Integer scores = 0;
+
         for (int i = 0 ; i < lines.size() ;  i = i + 3)
         {
-            ArrayList<Character> firstGroup = convertStringToArraylistChars(lines.get(i));
-            ArrayList<Character> secondGroup = convertStringToArraylistChars(lines.get(i+1));
-            ArrayList<Character> thirdGroup = convertStringToArraylistChars(lines.get(i+2));
-
-            List<Character> common = new ArrayList<>(firstGroup);
-            common.retainAll(secondGroup);
-            common.retainAll(thirdGroup);
+            List<Character> common = Utils.convertStringToArraylistOfCharacters(lines.get(i));
+            common.retainAll(Utils.convertStringToArraylistOfCharacters(lines.get(i+1)));
+            common.retainAll(Utils.convertStringToArraylistOfCharacters(lines.get(i+2)));
 
             scores += convertCharToValue(common.get(0));
         }
-
         return scores;
-    }
-
-    private static ArrayList<Character> convertStringToArraylistChars(String string)
-    {
-        ArrayList<Character> alChars = new ArrayList<>();
-        for (char c : string.toCharArray()) {
-            alChars.add(c);
-        }
-        return alChars;
     }
 
     private static Integer convertCharToValue(Character letter)
