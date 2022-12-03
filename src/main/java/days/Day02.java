@@ -44,9 +44,9 @@ public class Day02 {
     {
         Integer score = 0;
         for (String line : lines) {
-            String[] scoresAsChars = convertLettersToScores(line, scoreTemplates).split(" ");
-            score += (Integer.parseInt(scoresAsChars[0]));
-            score += (Integer.parseInt(scoresAsChars[1]));
+            String[] scores = convertLettersToScores(line, scoreTemplates).split(" ");
+            score += (Integer.parseInt(scores[0]));
+            score += (Integer.parseInt(scores[1]));
         }
         return score;
     }

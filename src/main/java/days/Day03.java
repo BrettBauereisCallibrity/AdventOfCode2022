@@ -24,7 +24,7 @@ public class Day03 {
             ArrayList<Character> firstHalf = convertStringToArraylistChars(parts[0]);
             ArrayList<Character> secondHalf = convertStringToArraylistChars(parts[1]);
 
-            List<Character> common = new ArrayList<Character>(firstHalf);
+            List<Character> common = new ArrayList<>(firstHalf);
             common.retainAll(secondHalf);
 
             scores += convertCharToValue(common.get(0));
@@ -43,7 +43,7 @@ public class Day03 {
             ArrayList<Character> secondGroup = convertStringToArraylistChars(lines.get(i+1));
             ArrayList<Character> thirdGroup = convertStringToArraylistChars(lines.get(i+2));
 
-            List<Character> common = new ArrayList<Character>(firstGroup);
+            List<Character> common = new ArrayList<>(firstGroup);
             common.retainAll(secondGroup);
             common.retainAll(thirdGroup);
 
@@ -55,7 +55,7 @@ public class Day03 {
 
     private static ArrayList<Character> convertStringToArraylistChars(String string)
     {
-        ArrayList<Character> alChars = new ArrayList<Character>();
+        ArrayList<Character> alChars = new ArrayList<>();
         for (char c : string.toCharArray()) {
             alChars.add(c);
         }
@@ -64,14 +64,6 @@ public class Day03 {
 
     private static Integer convertCharToValue(Character letter)
     {
-        int castAscii = (int) letter;
-        if (castAscii < 91 )
-        {
-            return castAscii - 38;
-        }
-        else
-        {
-            return castAscii - 96;
-        }
+        return Character.isUpperCase(letter) ? (int) letter - 38 : (int) letter - 96;
     }
 }
