@@ -23,7 +23,7 @@ public class Day03 {
             ArrayList<Character> secondHalf = Utils.convertStringToArraylistOfCharacters(line.substring(line.length() / 2));
             firstHalf.retainAll(secondHalf);
 
-            scores += convertCharToValue(firstHalf.get(0));
+            scores += convertCharacterToValue(firstHalf.get(0));
         }
         return scores;
     }
@@ -39,12 +39,12 @@ public class Day03 {
             common.retainAll(Utils.convertStringToArraylistOfCharacters(lines.get(i+1)));
             common.retainAll(Utils.convertStringToArraylistOfCharacters(lines.get(i+2)));
 
-            scores += convertCharToValue(common.get(0));
+            scores += convertCharacterToValue(common.get(0));
         }
         return scores;
     }
 
-    private static Integer convertCharToValue(Character letter)
+    private static Integer convertCharacterToValue(Character letter)
     {
         return Character.isUpperCase(letter) ? (int) letter - 38 : (int) letter - 96;
     }

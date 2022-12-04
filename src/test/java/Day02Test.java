@@ -1,4 +1,4 @@
-package test.java.days;
+package test.java;
 
 import main.java.Input;
 import main.java.days.Day02;
