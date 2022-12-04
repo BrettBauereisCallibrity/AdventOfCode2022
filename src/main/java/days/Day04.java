@@ -20,13 +20,12 @@ public class Day04 {
         {
            String[] splits = line.split(",");
 
-           String one = splits[0].split("-")[0];
-           String two = splits[0].split("-")[1];
-           String three = splits[1].split("-")[0];
-           String four = splits[1].split("-")[1];
+           Integer i1 = Integer.parseInt(splits[0].split("-")[0]);
+           Integer j1 = Integer.parseInt(splits[0].split("-")[1]);
+           Integer i2 = Integer.parseInt(splits[1].split("-")[0]);
+           Integer j2 = Integer.parseInt(splits[1].split("-")[1]);
 
-           if (Integer.parseInt(one) <= Integer.parseInt(three) && Integer.parseInt(two) >= Integer.parseInt(four) ||
-                   Integer.parseInt(one) >= Integer.parseInt(three) && Integer.parseInt(two) <= Integer.parseInt(four))
+           if (i1 <= i2 && j1 >= j2 || i1 >= i2 && j1 <= j2)
            {
                count++;
            }
@@ -44,21 +43,16 @@ public class Day04 {
         {
             String[] splits = line.split(",");
 
-            String one = splits[0].split("-")[0];
-            String two = splits[0].split("-")[1];
-            String three = splits[1].split("-")[0];
-            String four = splits[1].split("-")[1];
+            Integer i1 = Integer.parseInt(splits[0].split("-")[0]);
+            Integer j1 = Integer.parseInt(splits[0].split("-")[1]);
+            Integer i2 = Integer.parseInt(splits[1].split("-")[0]);
+            Integer j2 = Integer.parseInt(splits[1].split("-")[1]);
 
-            if (Integer.parseInt(one) < Integer.parseInt(three) && Integer.parseInt(two) >= Integer.parseInt(three))
+            if (i1 < i2 && j1 >= i2 || i1 > i2 && j2 >= i1)
             {
                 count++;
             }
-            else if (Integer.parseInt(one) > Integer.parseInt(three) && Integer.parseInt(four) >= Integer.parseInt(one))
-            {
-                count++;
-            }
-            else if (Integer.parseInt(one) == Integer.parseInt(three) || Integer.parseInt(one) == Integer.parseInt(four)
-                    || Integer.parseInt(two) == Integer.parseInt(three) || Integer.parseInt(two) == Integer.parseInt(four))
+            else if (i1 == i2 || i1 == j2 || j1 == i2 || j1 == j2)
             {
                 count++;
             }
