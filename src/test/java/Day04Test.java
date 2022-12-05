@@ -5,7 +5,7 @@ import main.java.days.Day04;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class Day04test {
+public class Day04Test {
 
     @Test
     private static void part1Test()
