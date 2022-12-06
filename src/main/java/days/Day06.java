@@ -15,44 +15,30 @@ public class Day06 {
 
     public static Integer part1(String filePathBase)
     {
-        ArrayList<String> lines = Input.readAsLines(filePathBase, "Day06.txt");
-        ArrayList<Character> allOfEm = Utils.convertStringToArraylistOfCharacters(lines.get(0));
-
-        for (int i = 3; i < allOfEm.size(); i++)
-        {
-            ArrayList<Character> fourInARow = new ArrayList<Character>();
-
-            for (int n = 0; n <= 3; n++){
-                fourInARow.add(allOfEm.get(i-n));
-            }
-
-            HashSet<Character> hashed = new HashSet<Character>(fourInARow);
-
-            if (hashed.size() == 4)
-            {
-                return i+1;
-            }
-        }
-
-        return 0;
+        return baseSolution(4, filePathBase);
     }
 
     public static Integer part2(String filePathBase)
     {
+        return baseSolution(14, filePathBase);
+    }
+
+    private static Integer baseSolution(Integer lengthOfUniqueString, String filePathBase)
+    {
         ArrayList<String> lines = Input.readAsLines(filePathBase, "Day06.txt");
-        ArrayList<Character> allOfEm = Utils.convertStringToArraylistOfCharacters(lines.get(0));
+        ArrayList<Character> fileAsChars = Utils.convertStringToArraylistOfCharacters(lines.get(0));
 
-        for (int i = 13; i < allOfEm.size(); i++)
+        for (int i = lengthOfUniqueString - 1; i < fileAsChars.size(); i++)
         {
-            ArrayList<Character> fourInARow = new ArrayList<Character>();
+            ArrayList<Character> xInARow = new ArrayList<>();
 
-            for (int n = 0; n <= 13; n++){
-                fourInARow.add(allOfEm.get(i-n));
+            for (int n = 0; n <= lengthOfUniqueString - 1; n++){
+                xInARow.add(fileAsChars.get(i-n));
             }
 
-            HashSet<Character> hashed = new HashSet<Character>(fourInARow);
+            HashSet<Character> hashed = new HashSet<>(xInARow);
 
-            if (hashed.size() == 14)
+            if (hashed.size() == lengthOfUniqueString)
             {
                 return i+1;
             }
