@@ -36,15 +36,7 @@ public class Day05 {
 
     private static int findLastLineOfBlocks(ArrayList<String> lines)
     {
-        int positionOfLastLineOfBlocks = 0;
-        for (int i = 0; i < lines.size() ; i++)
-        {
-            if (lines.get(i).isEmpty())
-            {
-                positionOfLastLineOfBlocks = i-2;
-            }
-        }
-        return positionOfLastLineOfBlocks;
+        return lines.indexOf("") - 2;
     }
 
     private static int getNumberOfColumns(ArrayList<String> lines, int lastLineOfBlocks)
@@ -55,8 +47,8 @@ public class Day05 {
     private static List<List<Character>> createColumns(int lastLineOfBlocks, int numberOfColumns, ArrayList<String> lines)
     {
         List<List<Character>> columns = new ArrayList<>();
-
-        for (int i = 0 ; i < numberOfColumns; i++){
+        for (int i = 0 ; i < numberOfColumns; i++)
+        {
             columns.add(new ArrayList<Character>());
         }
         populateColumns(lastLineOfBlocks, numberOfColumns, lines, columns);
@@ -67,14 +59,7 @@ public class Day05 {
     {
         for(int i = lastLineOfBlocks; i >= 0; i--)
         {
-            for (int n = 1; n < numberOfColumns*4; n = n +4){
-                int currentColumn = (n-1)/4;
-                try
-                {
-                    columns.get(currentColumn).add(lines.get(i).charAt(n));
-                }
-                catch (Exception e) {}
-            }
+            addColumnValuesFromLine(numberOfColumns, lines.get(i), columns);
         }
         for (List<Character> column : columns)
         {
@@ -82,21 +67,29 @@ public class Day05 {
         }
     }
 
+    private static void addColumnValuesFromLine(int numberOfColumns, String line, List<List<Character>> columns)
+    {
+        for (int n = 1; n < numberOfColumns*4; n = n +4){
+            int currentColumn = (n-1)/4;
+            try
+            {
+                columns.get(currentColumn).add(line.charAt(n));
+            }
+            catch (Exception e) {}
+        }
+    }
+
     private static void sortColumnsBasedOnInstructions(List<List<Character>> columns, ArrayList<String> lines, boolean part1)
     {
         for (String line : lines )
         {
-            if (line.contains("move"))
+            if (line.contains("move") && part1)
             {
-                if (part1)
-                {
-                    handleMovePart1(columns, line);
-                }
-                else
-                {
-                    handleMovePart2(columns, line);
-                }
-
+                handleMovePart1(columns, line);
+            }
+            else if (line.contains("move") && !part1)
+            {
+                handleMovePart2(columns, line);
             }
         }
     }
@@ -108,7 +101,6 @@ public class Day05 {
         //move 1 from 2 to 1
         //e.g. MoveValues = {1, 1, 0} {amount, columnIndexFrom, columnIndexTo
         Integer[] moveValues = {Integer.parseInt(splits[1]), Integer.parseInt(splits[3])-1, Integer.parseInt(splits[5])-1};
-
         for (int i = 0; i < moveValues[0]; i++)
         {
             columns.get(moveValues[2]).add(columns.get(moveValues[1]).get(columns.get(moveValues[1]).size()-1));
@@ -137,7 +129,6 @@ public class Day05 {
     private static String getStringFromColumns(List<List<Character>> columns)
     {
         String topOfBoxes = "";
-
         for (List<Character> column : columns)
         {
             topOfBoxes += column.get(column.size()-1);
