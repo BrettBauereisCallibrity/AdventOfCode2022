@@ -15,15 +15,15 @@ public class Day06 {
 
     public static Integer part1(String filePathBase)
     {
-        return baseSolution(4, filePathBase);
+        return findUniqueCharsStringLengthX(4, filePathBase);
     }
 
     public static Integer part2(String filePathBase)
     {
-        return baseSolution(14, filePathBase);
+        return findUniqueCharsStringLengthX(14, filePathBase);
     }
 
-    private static Integer baseSolution(Integer lengthOfUniqueString, String filePathBase)
+    private static Integer findUniqueCharsStringLengthX(Integer lengthOfUniqueString, String filePathBase)
     {
         ArrayList<String> lines = Input.readAsLines(filePathBase, "Day06.txt");
         ArrayList<Character> fileAsChars = Utils.convertStringToArraylistOfCharacters(lines.get(0));
@@ -31,13 +31,11 @@ public class Day06 {
         for (int i = lengthOfUniqueString - 1; i < fileAsChars.size(); i++)
         {
             ArrayList<Character> xInARow = new ArrayList<>();
-
             for (int n = 0; n <= lengthOfUniqueString - 1; n++){
                 xInARow.add(fileAsChars.get(i-n));
             }
 
             HashSet<Character> hashed = new HashSet<>(xInARow);
-
             if (hashed.size() == lengthOfUniqueString)
             {
                 return i+1;
@@ -45,5 +43,4 @@ public class Day06 {
         }
         return 0;
     }
-
 }
