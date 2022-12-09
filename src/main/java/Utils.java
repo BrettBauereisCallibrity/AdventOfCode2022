@@ -13,4 +13,13 @@ public class Utils {
         return alChars;
     }
 
+    public static ArrayList<Integer> convertStringToArraylistOfIntegers(String string)
+    {
+        ArrayList<Integer> nums = new ArrayList<>();
+        for (char c : string.toCharArray()) {
+            nums.add(Integer.parseInt(String.valueOf(c)));
+        }
+        return nums;
+    }
+
 }
