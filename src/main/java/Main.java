@@ -15,5 +15,7 @@ public class Main {
         Day06.showMeTheMoney(Input.fileBasePath);
         Day07.showMeTheMoney(Input.fileBasePath);
         Day08.showMeTheMoney(Input.fileBasePath);
+        Day09.showMeTheMoney(Input.fileBasePath);
+        Day10.showMeTheMoney(Input.fileBasePath);
     }
 }
