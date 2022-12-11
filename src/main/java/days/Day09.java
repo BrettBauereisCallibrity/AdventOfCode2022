@@ -8,17 +8,20 @@ import java.util.List;
 
 public class Day09 {
 
-    public static void showMeTheMoney(String filePathBase) {
+    public static void showMeTheMoney(String filePathBase)
+    {
         System.out.println("Day 9 - Part 1: " + part1(filePathBase));
         System.out.println("Day 9 - Part 2: " + part2(filePathBase));
     }
 
-    public static Integer part1(String filePathBase) {
+    public static Integer part1(String filePathBase)
+    {
         ArrayList<String> lines = Input.readAsLines(filePathBase, "Day09.txt");
         return calculateUniquePositionsOfTailForNumberOfKnots(lines, 1);
     }
 
-    public static Integer part2(String filePathBase) {
+    public static Integer part2(String filePathBase)
+    {
         ArrayList<String> lines = Input.readAsLines(filePathBase, "Day09.txt");
         return calculateUniquePositionsOfTailForNumberOfKnots(lines, 9);
     }
@@ -36,8 +39,10 @@ public class Day09 {
             String direction = splitInstructions[0];
             Integer distance = Integer.parseInt(splitInstructions[1]);
 
-            for (int i = 1; i <= distance; i++) {
-                switch(direction) {
+            for (int i = 1; i <= distance; i++)
+            {
+                switch(direction)
+                {
                     case "R":
                         currentKnotCoordinates.get(0).increaseX();
                         break;
@@ -90,13 +95,15 @@ public class Day09 {
     public static ArrayList<Coordinate> createBeginningCoordinatesList(Integer numberOfKnotsAfterHead)
     {
         ArrayList<Coordinate> knotPositions = new ArrayList<>();
-        for (int i = 0; i <= numberOfKnotsAfterHead; i++) {
+        for (int i = 0; i <= numberOfKnotsAfterHead; i++)
+        {
             knotPositions.add(new Coordinate(0,0));
         }
         return knotPositions;
     }
 
-    public static class Coordinate {
+    public static class Coordinate
+    {
         Integer x;
         Integer y;
         public Coordinate(Integer x, Integer y)
