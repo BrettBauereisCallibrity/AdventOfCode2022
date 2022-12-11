@@ -16,6 +16,6 @@ public class Day09Test {
     @Test
     private static void part2Test()
     {
-        Assert.assertEquals(Day09.part2(Input.testFileBasePath), Integer.valueOf(5));
+        Assert.assertEquals(Day09.part2(Input.testFileBasePath), Integer.valueOf(36));
     }
 }

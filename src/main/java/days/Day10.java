@@ -38,7 +38,6 @@ public class Day10 {
         return signalStrengths.stream().mapToInt(Integer::intValue).sum();
     }
 
-
     public static void addSignalStrengthIfNeeded(Integer cycle, Integer xRegistrar, ArrayList<Integer> signalStrengths)
     {
         if ((cycle - 20) % 40 == 0)
