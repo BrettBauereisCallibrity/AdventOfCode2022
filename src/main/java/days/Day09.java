@@ -15,26 +15,20 @@ public class Day09 {
 
     public static Integer part1(String filePathBase) {
         ArrayList<String> lines = Input.readAsLines(filePathBase, "Day09.txt");
-        return calculateUniquePositionOfTailForNumberOfKnots(lines, 1);
+        return calculateUniquePositionsOfTailForNumberOfKnots(lines, 1);
     }
 
     public static Integer part2(String filePathBase) {
         ArrayList<String> lines = Input.readAsLines(filePathBase, "Day09.txt");
-        return calculateUniquePositionOfTailForNumberOfKnots(lines, 9);
+        return calculateUniquePositionsOfTailForNumberOfKnots(lines, 9);
     }
 
-    public static Integer calculateUniquePositionOfTailForNumberOfKnots(ArrayList<String> lines, Integer numberOfKnotsAfterHead)
+    public static Integer calculateUniquePositionsOfTailForNumberOfKnots(ArrayList<String> lines, Integer numberOfKnotsAfterHead)
     {
+        ArrayList<Coordinate> currentKnotCoordinates = createBeginningCoordinatesList(numberOfKnotsAfterHead);
+
         List<String> positionsTailHasBeen = new ArrayList<>();
-        int positionOfFirstKnot = 0;
-        int positionOfTailKnot = numberOfKnotsAfterHead;
-
-        ArrayList<Coordinate> knotPositions = new ArrayList<>();
-        for (int i = positionOfFirstKnot; i <= positionOfTailKnot; i++) {
-            knotPositions.add(new Coordinate(0,0));
-        }
-
-        positionsTailHasBeen.add(knotPositions.get(positionOfTailKnot).getX() + "," + knotPositions.get(positionOfTailKnot).getY());
+        positionsTailHasBeen.add(currentKnotCoordinates.get(numberOfKnotsAfterHead).getX() + "," + currentKnotCoordinates.get(numberOfKnotsAfterHead).getY());
 
         for (String instruction : lines)
         {
@@ -45,52 +39,28 @@ public class Day09 {
             for (int i = 1; i <= distance; i++) {
                 switch(direction) {
                     case "R":
-                        knotPositions.get(0).increaseX();
+                        currentKnotCoordinates.get(0).increaseX();
                         break;
                     case "L":
-                        knotPositions.get(0).decreaseX();;
+                        currentKnotCoordinates.get(0).decreaseX();;
                         break;
                     case "U":
-                        knotPositions.get(0).increaseY();
+                        currentKnotCoordinates.get(0).increaseY();
                         break;
                     case "D":
-                        knotPositions.get(0).decreaseY();
+                        currentKnotCoordinates.get(0).decreaseY();
                         break;
                     default:
                 }
-
-                for (int knot = 1; knot <= positionOfTailKnot ; knot++)
+                for (int knot = 1; knot <= numberOfKnotsAfterHead ; knot++)
                 {
-                    Coordinate knotBefore = knotPositions.get(knot-1);
-                    Coordinate knotAfter = knotPositions.get(knot);
+                    Coordinate knotBefore = currentKnotCoordinates.get(knot-1);
+                    Coordinate knotAfter = currentKnotCoordinates.get(knot);
 
                     if (!isHeadOneUnitAwayFromTailOrLess(knotBefore.getX(), knotBefore.getY(), knotAfter.getX(), knotAfter.getY()))
                     {
-                        Integer dx = knotBefore.getX() - knotAfter.getX();
-                        Integer dy = knotBefore.getY() - knotAfter.getY();
-                        if (dx != 0)
-                        {
-                            if (dx > 0)
-                            {
-                                knotAfter.increaseX();
-                            }
-                            else
-                            {
-                                knotAfter.decreaseX();
-                            }
-                        }
-                        if (dy != 0)
-                        {
-                            if (dy > 0)
-                            {
-                                knotAfter.increaseY();
-                            }
-                            else
-                            {
-                                knotAfter.decreaseY();
-                            }
-                        }
-                        if (knot == positionOfTailKnot)
+                        moveTheKnot(knotBefore, knotAfter);
+                        if (knot == numberOfKnotsAfterHead)
                         {
                             positionsTailHasBeen.add(knotAfter.getX() + "," + knotAfter.getY());
                         }
@@ -101,10 +71,29 @@ public class Day09 {
         HashSet<String> uniquePositionsTailHasBeen = new HashSet<>(positionsTailHasBeen);
         return uniquePositionsTailHasBeen.size();
     }
-    
+
+    public static void moveTheKnot(Coordinate knotBefore, Coordinate knotAfter)
+    {
+        Integer dx = knotBefore.getX() - knotAfter.getX();
+        Integer dy = knotBefore.getY() - knotAfter.getY();
+        if (dx > 0) knotAfter.increaseX();
+        if (dx < 0) knotAfter.decreaseX();
+        if (dy > 0) knotAfter.increaseY();
+        if (dy < 0) knotAfter.decreaseY();
+    }
+
     public static boolean isHeadOneUnitAwayFromTailOrLess(Integer headX, Integer headY, Integer tailX, Integer tailY)
     {
         return (Math.abs(headX - tailX) <= 1) && (Math.abs(headY - tailY) <= 1);
+    }
+
+    public static ArrayList<Coordinate> createBeginningCoordinatesList(Integer numberOfKnotsAfterHead)
+    {
+        ArrayList<Coordinate> knotPositions = new ArrayList<>();
+        for (int i = 0; i <= numberOfKnotsAfterHead; i++) {
+            knotPositions.add(new Coordinate(0,0));
+        }
+        return knotPositions;
     }
 
     public static class Coordinate {
