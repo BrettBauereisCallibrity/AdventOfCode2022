@@ -76,10 +76,10 @@ public class Day09 {
     {
         Integer dx = knotBefore.getX() - knotAfter.getX();
         Integer dy = knotBefore.getY() - knotAfter.getY();
-        if (dx > 0) knotAfter.increaseX();
-        if (dx < 0) knotAfter.decreaseX();
-        if (dy > 0) knotAfter.increaseY();
-        if (dy < 0) knotAfter.decreaseY();
+        if (dx > 0) { knotAfter.increaseX(); }
+        if (dx < 0) { knotAfter.decreaseX(); }
+        if (dy > 0) { knotAfter.increaseY(); }
+        if (dy < 0) { knotAfter.decreaseY(); }
     }
 
     public static boolean isHeadOneUnitAwayFromTailOrLess(Integer headX, Integer headY, Integer tailX, Integer tailY)
